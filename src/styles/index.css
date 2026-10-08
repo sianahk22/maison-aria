@@ -1,0 +1,33 @@
+@import 'tailwindcss';
+
+/*
+  Tokens de design AURA Studio.
+  Chaque variable --color-* devient une classe Tailwind : bg-ivory, text-charcoal, etc.
+
+  Accessibilité (contraste sur fond ivoire, seuil WCAG AA = 4.5:1 pour le texte courant) :
+  - terracotta / sage / gold : décoratifs uniquement (fonds, bordures, grands titres)
+  - terracotta-deep (5.47:1) et sage-deep (5.12:1) : à utiliser pour le texte et les liens
+*/
+@theme {
+  --color-ivory: #f7f3ee;
+  --color-charcoal: #1e1d1a;
+  --color-terracotta: #b86e5b;
+  --color-terracotta-deep: #94503f;
+  --color-sage: #a9b5a0;
+  --color-sage-deep: #5e6b56;
+  --color-gold: #c7a66a;
+  --color-white: #ffffff;
+
+  --font-serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-ivory text-charcoal font-sans antialiased;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-terracotta-deep;
+  }
+}
