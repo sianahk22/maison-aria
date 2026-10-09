@@ -23,3 +23,12 @@ export const DEMO_CONCIERGE_REQUESTS = [
 ]
 
 export const DEMO_AVERAGE_CART = 124000 // 1 240 € — valeur fictive
+
+// Commandes FICTIVES affichées au tableau de bord (aucune vente réelle).
+export const DEMO_RECENT_ORDERS = [
+  { id: 'CMD-DEMO-1108', customer: 'Client fictif B.', daysAgo: 0, status: 'preparing', lines: [{ productId: 'canape-sienne', quantity: 1 }, { productId: 'suspension-halo', quantity: 1 }] },
+  { id: 'CMD-DEMO-1107', customer: 'Client fictif E.', daysAgo: 1, status: 'preparing', lines: [{ productId: 'vase-dune', quantity: 2 }] },
+  { id: 'CMD-DEMO-1105', customer: 'Client fictif A.', daysAgo: 2, status: 'shipped', lines: [{ productId: 'bureau-nordique', quantity: 1 }, { productId: 'chaise-atelier', quantity: 1 }] },
+  { id: 'CMD-DEMO-1102', customer: 'Client fictif D.', daysAgo: 4, status: 'delivered', lines: [{ productId: 'chaises-pop', quantity: 2 }] },
+  { id: 'CMD-DEMO-1098', customer: 'Client fictif C.', daysAgo: 6, status: 'delivered', lines: [{ productId: 'canape-lune', quantity: 1 }] },
+]

@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from 'react'
+import { use, useEffect, useRef, useState } from 'react'
 import { ROUTES } from '../../app/routes'
 import { ButtonLink } from '../../components/ui/Button'
 import { Icon } from '../../components/ui/Icon'
 import { QUICK_SUGGESTIONS } from '../../lib/recommendationEngine'
-import { MAX_MESSAGE_LENGTH } from '../../services/conciergeService'
+import { MAX_MESSAGE_LENGTH, getAriaMode } from '../../services/conciergeService'
 import { useProducts } from '../products/useProducts'
 import { RecommendationCard } from './RecommendationCard'
 import { useConcierge } from './useConcierge'
@@ -44,6 +44,9 @@ function Message({ message, productsById }) {
           <span className="sr-only">ARIA : </span>
           {message.text}
         </p>
+        {message.fallback && (
+          <p className="text-xs text-stone-deep">Réponse de secours en mode simulé (service IA momentanément indisponible).</p>
+        )}
         {recommendations.length > 0 && (
           <ul className="grid gap-2" aria-label="Produits recommandés">
             {recommendations.map((item) => (
@@ -66,6 +69,7 @@ function Message({ message, productsById }) {
 
 export function ConciergeChat({ contextProduct }) {
   const products = useProducts()
+  const ariaMode = use(getAriaMode())
   const productsById = new Map(products.map((product) => [product.id, product]))
   const { messages, thinking, send } = useConcierge({ contextProductId: contextProduct?.id })
   const [draft, setDraft] = useState(() =>
@@ -94,7 +98,7 @@ export function ConciergeChat({ contextProduct }) {
             <h2 id="chat-title" className="font-serif text-lg leading-tight">
               ARIA Concierge
             </h2>
-            <p className="text-xs text-stone-deep">Assistant simulé · aucune IA connectée</p>
+            <p className="text-xs text-stone-deep">{ariaMode.label}</p>
           </div>
         </div>
         <div className="hidden sm:block">

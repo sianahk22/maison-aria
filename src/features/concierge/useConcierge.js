@@ -4,7 +4,7 @@ import { askConcierge } from '../../services/conciergeService'
 const WELCOME = {
   id: 'welcome',
   role: 'assistant',
-  text: 'Bonjour, je suis ARIA, l’assistante (simulée) de Maison Aria. Décrivez-moi votre pièce, votre style ou votre budget : je vous propose des pièces de notre collection.',
+  text: 'Bonjour, je suis ARIA, l’assistante de Maison Aria. Décrivez-moi votre pièce, votre style ou votre budget : je vous propose des pièces de notre collection.',
   recommendations: [],
 }
 

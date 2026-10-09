@@ -116,7 +116,7 @@ function ProductDetails({ product, products }) {
               <div className="mt-4 flex flex-wrap gap-3">
                 <ButtonLink to={`${ROUTES.concierge}?product=${product.id}`} variant="secondary" size="sm">
                   <Icon name="sparkle" className="h-4 w-4" />
-                  Demander conseil à l’assistant
+                  Demander conseil à ARIA Concierge
                 </ButtonLink>
                 <ButtonLink to={ROUTES.booking} variant="ghost" size="sm">
                   Prendre rendez-vous

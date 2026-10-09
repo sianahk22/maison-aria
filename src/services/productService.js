@@ -9,6 +9,11 @@ let productsPromise
 
 // La promesse est mise en cache : React (`use`) a besoin de recevoir la même à chaque rendu.
 export function listProducts() {
-  productsPromise ??= wait(250).then(() => products)
+  productsPromise ??= wait(250)
+    .then(() => products)
+    .catch((error) => {
+      productsPromise = undefined // échec : le prochain essai relancera un vrai chargement
+      throw error
+    })
   return productsPromise
 }

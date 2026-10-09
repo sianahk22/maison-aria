@@ -9,8 +9,8 @@ export const BRAND = {
   ],
 }
 
-export const DEMO_LABEL = 'Projet personnel de démonstration — Aura Studio'
+export const DEMO_LABEL = 'Projet personnel de démonstration — Maison Aria'
 
 export const DEMO_BOOKING_NOTICE = 'Réservation de démonstration — aucun rendez-vous réel ne sera créé.'
 
-export const pageTitle = (title) => `${title} · ${BRAND.name} — démo Aura Studio`
+export const pageTitle = (title) => `${title} · ${BRAND.name} (projet de démonstration)`

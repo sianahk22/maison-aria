@@ -4,6 +4,7 @@ import { RootLayout } from '../components/layout/RootLayout'
 import { ErrorPage } from '../pages/ErrorPage'
 import { HomePage } from '../pages/HomePage'
 import { NotFoundPage } from '../pages/NotFoundPage'
+import { RouteErrorPage } from '../pages/RouteErrorPage'
 import { ROUTES } from './routes'
 
 // Chargement à la demande : le code d'une page n'est téléchargé que lorsqu'on la visite.
@@ -23,16 +24,23 @@ export const router = createBrowserRouter([
     Component: RootLayout,
     ErrorBoundary: ErrorPage,
     children: [
-      { path: ROUTES.home, Component: HomePage },
-      { path: ROUTES.shop, Component: ShopPage },
-      { path: ROUTES.product(':productId'), Component: ProductPage },
-      { path: ROUTES.booking, Component: BookingPage },
-      { path: ROUTES.concierge, Component: ConciergePage },
-      { path: ROUTES.cart, Component: CartPage },
-      { path: ROUTES.account, Component: AccountPage },
-      { path: ROUTES.admin, Component: AdminPage },
-      { path: ROUTES.notFound, Component: NotFoundPage },
-      { path: '*', Component: NotFoundPage },
+      {
+        // Frontière d'erreur interne : une page en erreur s'affiche sous l'en-tête, qui reste utilisable.
+        // ErrorPage (ci-dessus) ne sert qu'en dernier recours, si le gabarit lui-même échoue.
+        ErrorBoundary: RouteErrorPage,
+        children: [
+          { path: ROUTES.home, Component: HomePage },
+          { path: ROUTES.shop, Component: ShopPage },
+          { path: ROUTES.product(':productId'), Component: ProductPage },
+          { path: ROUTES.booking, Component: BookingPage },
+          { path: ROUTES.concierge, Component: ConciergePage },
+          { path: ROUTES.cart, Component: CartPage },
+          { path: ROUTES.account, Component: AccountPage },
+          { path: ROUTES.admin, Component: AdminPage },
+          { path: ROUTES.notFound, Component: NotFoundPage },
+          { path: '*', Component: NotFoundPage },
+        ],
+      },
     ],
   },
 ])

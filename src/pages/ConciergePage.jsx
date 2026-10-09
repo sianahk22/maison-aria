@@ -1,3 +1,4 @@
+import { use } from 'react'
 import { useSearchParams } from 'react-router'
 import { PageHeader } from '../components/layout/PageHeader'
 import { Container } from '../components/ui/Container'
@@ -6,9 +7,10 @@ import { SmartImage } from '../components/ui/SmartImage'
 import { sceneImages } from '../data/images'
 import { ConciergeChat } from '../features/concierge/ConciergeChat'
 import { useProduct } from '../features/products/useProducts'
+import { getAriaMode } from '../services/conciergeService'
 
 const HOW_IT_WORKS = [
-  'ARIA repère dans votre message des critères simples : type de meuble, style, ambiance, pièce, budget.',
+  'ARIA analyse votre demande : type de meuble, style, ambiance, pièce, budget.',
   'Elle ne recommande que des pièces existant dans le catalogue de démonstration, en expliquant pourquoi.',
   'Pour un vrai projet, elle vous oriente vers une consultation avec un conseiller.',
 ]
@@ -17,6 +19,7 @@ export function ConciergePage() {
   const [searchParams] = useSearchParams()
   // ?product=<id> : question posée depuis une fiche produit.
   const contextProduct = useProduct(searchParams.get('product'))
+  const ariaMode = use(getAriaMode())
 
   return (
     <>
@@ -30,11 +33,20 @@ export function ConciergePage() {
         <div>
           <p className="mb-4 flex gap-3 rounded-2xl bg-gold/25 p-4 text-sm leading-relaxed">
             <Icon name="alert" className="mt-0.5 h-5 w-5 shrink-0" />
-            <span>
-              <strong>Assistant simulé.</strong> Les réponses sont calculées localement, par des règles,
-              à partir du catalogue fictif. Aucune IA n’est connectée et votre message ne quitte pas
-              votre navigateur. Ceci n’est pas un conseil professionnel.
-            </span>
+            {ariaMode.mode === 'ai' ? (
+              <span>
+                <strong>Assistant IA (Claude, Anthropic).</strong> Votre message est envoyé à notre serveur puis
+                au modèle pour formuler une réponse ; n’y indiquez pas de données personnelles. Les
+                recommandations sont limitées au catalogue fictif et vérifiées par l’application. Ceci n’est
+                pas un conseil professionnel.
+              </span>
+            ) : (
+              <span>
+                <strong>Assistant simulé.</strong> Les réponses sont calculées localement, par des règles,
+                à partir du catalogue fictif. Aucune IA n’est connectée et votre message ne quitte pas
+                votre navigateur. Ceci n’est pas un conseil professionnel.
+              </span>
+            )}
           </p>
           <ConciergeChat key={contextProduct?.id ?? 'general'} contextProduct={contextProduct} />
         </div>

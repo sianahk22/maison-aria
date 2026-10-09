@@ -1,10 +1,10 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// CATALOGUE FICTIF — Maison Aria (projet de démonstration Aura Studio).
+// CATALOGUE FICTIF — Maison Aria (projet personnel de démonstration).
 // Produits, prix, dimensions, délais et disponibilités sont inventés.
 // Prix en centimes (entiers). `id` est stable : il sert d'URL (/shop/:productId)
 // et de référence dans le panier, les réservations et l'assistant.
 // ─────────────────────────────────────────────────────────────────────────────
-import { productImages } from './images'
+import { productImages } from './images.js'
 
 export const CATEGORIES = [
   { id: 'mobilier', label: 'Mobilier' },

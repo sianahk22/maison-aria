@@ -1,8 +1,8 @@
 {
-  "name": "aura-studio",
+  "name": "maison-aria",
   "private": true,
   "version": "0.1.0",
-  "description": "Aura Studio — projet personnel de démonstration : Maison Aria, boutique fictive de mobilier et décoration.",
+  "description": "Maison Aria — projet personnel de démonstration : boutique fictive de mobilier et décoration, réservation de consultations et assistant ARIA Concierge simulé.",
   "type": "module",
   "engines": {
     "node": ">=22.22"
@@ -11,9 +11,12 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "node --import ./tests/support/resolve-extensions.mjs --test",
+    "test:e2e": "node tests/e2e/run.mjs"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.133.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "react-router": "^8.4.0"

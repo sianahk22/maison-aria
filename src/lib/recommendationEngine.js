@@ -152,8 +152,8 @@ function scoreProduct(product, { criteria, maxBudget, contextProduct }) {
 export const QUICK_SUGGESTIONS = [
   'Je cherche un canapé pour un petit salon.',
   'Je veux une lampe chaleureuse.',
-  'Quel produit convient à un intérieur minimaliste ?',
-  'Je souhaite parler à un conseiller.',
+  'Quel objet convient à un intérieur minimaliste ?',
+  'Je souhaite prendre rendez-vous.',
 ]
 
 // Point d'entrée : (demande, catalogue) → réponse structurée, toujours de la même forme.

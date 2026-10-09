@@ -1,4 +1,5 @@
 // Logique pure de la boutique : recherche, filtres, tri et produits similaires.
+import { CATEGORIES } from '../../data/products'
 import { normalizeText } from '../../lib/text'
 
 export const PRICE_RANGES = [
@@ -32,9 +33,11 @@ export function readFilters(searchParams) {
   }
 }
 
+// Texte dans lequel on cherche : nom, description courte, catégorie, style, type, matériaux, tags, pièces.
 function searchableText(product) {
+  const category = CATEGORIES.find((item) => item.id === product.category)?.label ?? ''
   return normalizeText(
-    [product.name, product.shortDescription, product.style, product.type, ...product.tags, ...product.rooms].join(' '),
+    [product.name, product.shortDescription, category, product.style, product.type, ...product.materials, ...product.tags, ...product.rooms].join(' '),
   )
 }
 

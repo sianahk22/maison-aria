@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
 import { Link } from 'react-router'
-import { BRAND } from '../../app/brand'
+import { BRAND, DEMO_LABEL } from '../../app/brand'
 import { ROUTES } from '../../app/routes'
 import { Badge } from '../../components/ui/Badge'
 import { ButtonLink } from '../../components/ui/Button'
@@ -60,7 +60,7 @@ export function HeroSection() {
               Parler à l’assistant
             </ButtonLink>
           </div>
-          <p className="mt-8 text-xs text-stone-deep">Projet personnel de démonstration — Aura Studio. Marque fictive.</p>
+          <p className="mt-8 text-xs text-stone-deep">{DEMO_LABEL}. Marque fictive.</p>
         </div>
 
         <div className="relative">

@@ -8,8 +8,8 @@ const fieldClass =
 export function ProductFilters({ filters, onChange }) {
   return (
     <form role="search" onSubmit={(event) => event.preventDefault()} className="space-y-5">
-      <div className="grid gap-3 md:grid-cols-[1fr_auto_auto]">
-        <div className="relative">
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-[1fr_auto_auto]">
+        <div className="relative col-span-2 md:col-span-1">
           <label htmlFor="shop-search" className="sr-only">
             Rechercher un produit
           </label>
@@ -35,7 +35,7 @@ export function ProductFilters({ filters, onChange }) {
             id="shop-price"
             value={filters.price}
             onChange={(event) => onChange({ price: event.target.value })}
-            className={`${fieldClass} md:w-52`}
+            className={`${fieldClass} min-w-0 pr-8 md:w-52`}
           >
             {PRICE_RANGES.map((range) => (
               <option key={range.id} value={range.id}>
@@ -53,11 +53,11 @@ export function ProductFilters({ filters, onChange }) {
             id="shop-sort"
             value={filters.sort}
             onChange={(event) => onChange({ sort: event.target.value })}
-            className={`${fieldClass} md:w-48`}
+            className={`${fieldClass} min-w-0 pr-8 md:w-48`}
           >
             {SORT_OPTIONS.map((option) => (
               <option key={option.id} value={option.id}>
-                Trier : {option.label}
+                {option.label}
               </option>
             ))}
           </select>

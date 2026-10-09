@@ -25,4 +25,9 @@ export default defineConfig([
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
     },
   },
+  {
+    // Code exécuté par Node (tests, fonction serverless) : variables globales de Node.
+    files: ['tests/**/*.{js,mjs}', 'api/**/*.js', 'server/**/*.js'],
+    languageOptions: { globals: globals.node },
+  },
 ])

@@ -5,7 +5,7 @@ import { Button } from '../components/ui/Button'
 import { Container } from '../components/ui/Container'
 import { Icon } from '../components/ui/Icon'
 import { Modal } from '../components/ui/Modal'
-import { DEMO_AVERAGE_CART, DEMO_CONCIERGE_REQUESTS, DEMO_PRODUCT_VIEWS } from '../data/demoAnalytics'
+import { DEMO_AVERAGE_CART, DEMO_CONCIERGE_REQUESTS, DEMO_PRODUCT_VIEWS, DEMO_RECENT_ORDERS } from '../data/demoAnalytics'
 import { BarList, Panel, StatCard } from '../features/admin/DashboardWidgets'
 import { STATUS_LABELS, bookingStatus, computeDashboard, topViewedProducts } from '../features/admin/dashboardStats'
 import { resetDemoData } from '../features/admin/resetDemoData'
@@ -28,6 +28,11 @@ const INTENT_LABELS = {
   unknown: 'Incomprise',
 }
 const STATUS_TONES = { upcoming: 'sage', completed: 'neutral', cancelled: 'outline' }
+const ORDER_STATUS = {
+  preparing: { label: 'En préparation', tone: 'gold' },
+  shipped: { label: 'Expédiée', tone: 'sage' },
+  delivered: { label: 'Livrée', tone: 'neutral' },
+}
 
 export function AdminPage() {
   const products = useProducts()
@@ -49,6 +54,12 @@ export function AdminPage() {
   }))
   const requests = [...localRequests, ...demoRequests]
   const weekMax = Math.max(1, ...stats.week.map((day) => day.count))
+  const priceOf = (id) => products.find((product) => product.id === id)?.price ?? 0
+  const orders = DEMO_RECENT_ORDERS.map((order) => ({
+    ...order,
+    itemCount: order.lines.reduce((sum, line) => sum + line.quantity, 0),
+    total: order.lines.reduce((sum, line) => sum + priceOf(line.productId) * line.quantity, 0),
+  }))
 
   return (
     <>
@@ -182,7 +193,28 @@ export function AdminPage() {
             </div>
           </Panel>
 
-          <Panel id="reset-title" title="Outils de démonstration">
+          <Panel id="orders-title" title="Commandes fictives">
+            <ul className="divide-y divide-ink/10">
+              {orders.map((order) => (
+                <li key={order.id} className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 py-3 text-sm">
+                  <div className="min-w-0">
+                    <p className="font-mono text-xs">{order.id}</p>
+                    <p className="text-stone-deep">
+                      {order.customer} · {order.itemCount} article{order.itemCount > 1 ? 's' : ''}
+                      {order.daysAgo === 0 ? ' · aujourd’hui' : ` · il y a ${order.daysAgo} j`}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">{formatPrice(order.total)}</span>
+                    <Badge tone={ORDER_STATUS[order.status].tone}>{ORDER_STATUS[order.status].label}</Badge>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-3 text-xs text-stone-deep">Commandes inventées : aucune vente réelle. Montants calculés à partir du catalogue fictif.</p>
+          </Panel>
+
+          <Panel id="reset-title" title="Outils de démonstration" className="lg:col-span-2">
             <p className="text-sm leading-relaxed text-stone-deep">
               Remet à zéro, dans ce navigateur uniquement, le panier, les réservations, le journal d’ARIA et les
               fiches consultées.
