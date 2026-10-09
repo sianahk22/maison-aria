@@ -1,33 +1,82 @@
 @import 'tailwindcss';
 
 /*
-  Tokens de design AURA Studio.
-  Chaque variable --color-* devient une classe Tailwind : bg-ivory, text-charcoal, etc.
+  Tokens de design — Maison Aria (projet Aura Studio).
+  Chaque variable --color-* devient une classe Tailwind : bg-ivory, text-ink, etc.
 
-  Accessibilité (contraste sur fond ivoire, seuil WCAG AA = 4.5:1 pour le texte courant) :
-  - terracotta / sage / gold : décoratifs uniquement (fonds, bordures, grands titres)
-  - terracotta-deep (5.47:1) et sage-deep (5.12:1) : à utiliser pour le texte et les liens
+  Contraste sur fond ivoire (seuil WCAG AA = 4.5:1 pour le texte courant) :
+  - ink 16.2:1, espresso 12.1:1 : textes principaux
+  - terracotta-deep 5.5:1, sage-deep 5.1:1, stone-deep 5.8:1 : petits textes d'accent
+  - terracotta 3.5:1, sage 1.9:1, gold 2.1:1, stone 3.9:1 : décor uniquement
+    (fonds, bordures, grands titres) — jamais pour du petit texte
 */
 @theme {
   --color-ivory: #f7f3ee;
-  --color-charcoal: #1e1d1a;
+  --color-white: #ffffff;
+  --color-ink: #181715;
+  --color-espresso: #3a2c24;
   --color-terracotta: #b86e5b;
   --color-terracotta-deep: #94503f;
   --color-sage: #a9b5a0;
   --color-sage-deep: #5e6b56;
   --color-gold: #c7a66a;
-  --color-white: #ffffff;
+  --color-stone: #817870;
+  --color-stone-deep: #655d56;
+  --color-sand: #ede6dd;
 
-  --font-serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  --font-serif: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif;
   --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  --shadow-float: 0 20px 50px -20px rgb(24 23 21 / 0.25);
+
+  --animate-fade-up: fade-up 0.5s ease-out both;
+  --animate-pulse-dot: pulse-dot 1.2s ease-in-out infinite;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulse-dot {
+    0%,
+    80%,
+    100% {
+      opacity: 0.25;
+    }
+    40% {
+      opacity: 1;
+    }
+  }
 }
 
 @layer base {
+  html {
+    scroll-padding-top: 6rem;
+  }
+
   body {
-    @apply bg-ivory text-charcoal font-sans antialiased;
+    @apply bg-ivory font-sans text-ink antialiased;
   }
 
   :focus-visible {
     @apply outline-2 outline-offset-2 outline-terracotta-deep;
+  }
+
+  /* Respecte le réglage système « réduire les animations ». */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }

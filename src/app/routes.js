@@ -1,23 +1,23 @@
-// Source unique des chemins de l'application : le routeur, le menu et le pied de page
-// s'appuient sur ces constantes pour éviter les URL écrites en dur un peu partout.
+// Source unique des chemins : le routeur, les menus et les liens s'appuient sur ces constantes.
 export const ROUTES = {
   home: '/',
-  shop: '/boutique',
-  product: (slug) => `/boutique/${slug}`,
-  cart: '/panier',
-  booking: '/reservation',
+  shop: '/shop',
+  product: (productId) => `/shop/${productId}`,
+  booking: '/booking',
   concierge: '/concierge',
-  account: '/compte',
+  cart: '/cart',
+  account: '/account',
   admin: '/admin',
+  notFound: '/404',
 }
 
 export const MAIN_NAV = [
-  { to: ROUTES.shop, label: 'Boutique' },
-  { to: ROUTES.booking, label: 'Réservation' },
-  { to: ROUTES.concierge, label: 'AURA Concierge' },
+  { to: ROUTES.shop, label: 'Collection' },
+  { to: ROUTES.concierge, label: 'ARIA Concierge' },
+  { to: ROUTES.booking, label: 'Consultations' },
 ]
 
 export const SECONDARY_NAV = [
-  { to: ROUTES.account, label: 'Espace cliente' },
-  { to: ROUTES.admin, label: 'Administration' },
+  { to: ROUTES.account, label: 'Mon espace' },
+  { to: ROUTES.admin, label: 'Tableau de bord' },
 ]

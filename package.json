@@ -2,8 +2,11 @@
   "name": "aura-studio",
   "private": true,
   "version": "0.1.0",
-  "description": "AURA Studio — application web de démonstration (marque fictive de soins et bien-être).",
+  "description": "Aura Studio — projet personnel de démonstration : Maison Aria, boutique fictive de mobilier et décoration.",
   "type": "module",
+  "engines": {
+    "node": ">=22.22"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",

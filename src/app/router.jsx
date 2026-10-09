@@ -1,31 +1,38 @@
+import { lazy } from 'react'
 import { createBrowserRouter } from 'react-router'
 import { RootLayout } from '../components/layout/RootLayout'
-import { AccountPage } from '../pages/AccountPage'
-import { AdminPage } from '../pages/AdminPage'
-import { BookingPage } from '../pages/BookingPage'
-import { CartPage } from '../pages/CartPage'
-import { ConciergePage } from '../pages/ConciergePage'
 import { ErrorPage } from '../pages/ErrorPage'
 import { HomePage } from '../pages/HomePage'
 import { NotFoundPage } from '../pages/NotFoundPage'
-import { ProductPage } from '../pages/ProductPage'
-import { ShopPage } from '../pages/ShopPage'
 import { ROUTES } from './routes'
+
+// Chargement à la demande : le code d'une page n'est téléchargé que lorsqu'on la visite.
+// En attendant, le <Suspense> de RootLayout affiche un squelette sous l'en-tête.
+const lazyPage = (load, exportName) => lazy(async () => ({ default: (await load())[exportName] }))
+
+const ShopPage = lazyPage(() => import('../pages/ShopPage'), 'ShopPage')
+const ProductPage = lazyPage(() => import('../pages/ProductPage'), 'ProductPage')
+const BookingPage = lazyPage(() => import('../pages/BookingPage'), 'BookingPage')
+const ConciergePage = lazyPage(() => import('../pages/ConciergePage'), 'ConciergePage')
+const CartPage = lazyPage(() => import('../pages/CartPage'), 'CartPage')
+const AccountPage = lazyPage(() => import('../pages/AccountPage'), 'AccountPage')
+const AdminPage = lazyPage(() => import('../pages/AdminPage'), 'AdminPage')
 
 export const router = createBrowserRouter([
   {
-    element: <RootLayout />,
-    errorElement: <ErrorPage />,
+    Component: RootLayout,
+    ErrorBoundary: ErrorPage,
     children: [
-      { path: ROUTES.home, element: <HomePage /> },
-      { path: ROUTES.shop, element: <ShopPage /> },
-      { path: ROUTES.product(':slug'), element: <ProductPage /> },
-      { path: ROUTES.cart, element: <CartPage /> },
-      { path: ROUTES.booking, element: <BookingPage /> },
-      { path: ROUTES.concierge, element: <ConciergePage /> },
-      { path: ROUTES.account, element: <AccountPage /> },
-      { path: ROUTES.admin, element: <AdminPage /> },
-      { path: '*', element: <NotFoundPage /> },
+      { path: ROUTES.home, Component: HomePage },
+      { path: ROUTES.shop, Component: ShopPage },
+      { path: ROUTES.product(':productId'), Component: ProductPage },
+      { path: ROUTES.booking, Component: BookingPage },
+      { path: ROUTES.concierge, Component: ConciergePage },
+      { path: ROUTES.cart, Component: CartPage },
+      { path: ROUTES.account, Component: AccountPage },
+      { path: ROUTES.admin, Component: AdminPage },
+      { path: ROUTES.notFound, Component: NotFoundPage },
+      { path: '*', Component: NotFoundPage },
     ],
   },
 ])

@@ -1,17 +1,61 @@
+import { useSearchParams } from 'react-router'
 import { PageHeader } from '../components/layout/PageHeader'
-import { ComingSoon } from '../components/ui/ComingSoon'
+import { Container } from '../components/ui/Container'
+import { Icon } from '../components/ui/Icon'
+import { SmartImage } from '../components/ui/SmartImage'
+import { sceneImages } from '../data/images'
+import { ConciergeChat } from '../features/concierge/ConciergeChat'
+import { useProduct } from '../features/products/useProducts'
+
+const HOW_IT_WORKS = [
+  'ARIA repère dans votre message des critères simples : type de meuble, style, ambiance, pièce, budget.',
+  'Elle ne recommande que des pièces existant dans le catalogue de démonstration, en expliquant pourquoi.',
+  'Pour un vrai projet, elle vous oriente vers une consultation avec un conseiller.',
+]
 
 export function ConciergePage() {
+  const [searchParams] = useSearchParams()
+  // ?product=<id> : question posée depuis une fiche produit.
+  const contextProduct = useProduct(searchParams.get('product'))
+
   return (
     <>
       <PageHeader
         eyebrow="Assistant"
-        title="AURA Concierge"
-        description="Décrivez votre peau et vos envies : l'assistant vous oriente vers les soins du catalogue."
+        title="ARIA Concierge"
+        description="Décrivez votre intérieur et vos envies : ARIA vous oriente vers des pièces de la collection."
       />
-      <ComingSoon step={8}>
-        Assistant simulé : les recommandations sont calculées par des règles à partir du catalogue, sans appel à une vraie IA. Elles ne constituent pas un avis médical.
-      </ComingSoon>
+
+      <Container className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-14">
+        <div>
+          <p className="mb-4 flex gap-3 rounded-2xl bg-gold/25 p-4 text-sm leading-relaxed">
+            <Icon name="alert" className="mt-0.5 h-5 w-5 shrink-0" />
+            <span>
+              <strong>Assistant simulé.</strong> Les réponses sont calculées localement, par des règles,
+              à partir du catalogue fictif. Aucune IA n’est connectée et votre message ne quitte pas
+              votre navigateur. Ceci n’est pas un conseil professionnel.
+            </span>
+          </p>
+          <ConciergeChat key={contextProduct?.id ?? 'general'} contextProduct={contextProduct} />
+        </div>
+
+        <aside className="space-y-6">
+          <div className="hidden aspect-[4/5] overflow-hidden rounded-3xl lg:block">
+            <SmartImage image={sceneImages.concierge} sizes="352px" />
+          </div>
+          <div className="rounded-3xl bg-white p-6">
+            <h2 className="font-serif text-2xl">Comment fonctionne ARIA ?</h2>
+            <ol className="mt-4 space-y-3 text-sm leading-relaxed text-stone-deep">
+              {HOW_IT_WORKS.map((step, index) => (
+                <li key={step} className="flex gap-3">
+                  <span className="font-serif text-base text-terracotta-deep">{index + 1}.</span>
+                  {step}
+                </li>
+              ))}
+            </ol>
+          </div>
+        </aside>
+      </Container>
     </>
   )
 }

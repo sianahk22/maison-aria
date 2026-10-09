@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice">
+  <rect width="400" height="500" fill="#EDE6DD"/>
+  <circle cx="200" cy="230" r="46" fill="none" stroke="#817870" stroke-width="2"/>
+  <text x="200" y="240" text-anchor="middle" font-family="Georgia, serif" font-size="26" letter-spacing="3" fill="#655D56">MA</text>
+  <text x="200" y="320" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#655D56">Image indisponible</text>
+</svg>

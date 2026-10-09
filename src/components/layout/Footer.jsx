@@ -1,23 +1,25 @@
 import { Link } from 'react-router'
-import { MAIN_NAV, SECONDARY_NAV } from '../../app/routes'
+import { BRAND, DEMO_LABEL } from '../../app/brand'
+import { MAIN_NAV, ROUTES, SECONDARY_NAV } from '../../app/routes'
 import { Container } from '../ui/Container'
+import { Logo } from './Logo'
+
+const FOOTER_LINKS = [{ to: ROUTES.cart, label: 'Panier' }, ...MAIN_NAV, ...SECONDARY_NAV]
 
 export function Footer() {
   return (
-    <footer className="mt-24 border-t border-charcoal/10 bg-white">
-      <Container className="grid gap-10 py-12 md:grid-cols-3">
+    <footer className="mt-24 bg-ink text-ivory">
+      <Container className="grid gap-12 py-16 md:grid-cols-[1.4fr_1fr]">
         <div>
-          <p className="font-serif text-xl">AURA Studio</p>
-          <p className="mt-3 max-w-xs text-sm leading-relaxed text-sage-deep">
-            Soins, rituels et consultations. Une marque fictive imaginée pour un portfolio.
-          </p>
+          <Logo inverted />
+          <p className="mt-6 max-w-sm font-serif text-2xl leading-snug">{BRAND.slogan}</p>
         </div>
 
-        <nav aria-label="Liens du pied de page" className="md:col-span-2">
-          <ul className="grid grid-cols-2 gap-3 text-sm sm:grid-cols-3">
-            {[...MAIN_NAV, ...SECONDARY_NAV].map((item) => (
+        <nav aria-label="Liens du pied de page">
+          <ul className="grid grid-cols-2 gap-x-6 gap-y-3 text-sm">
+            {FOOTER_LINKS.map((item) => (
               <li key={item.to}>
-                <Link to={item.to} className="hover:text-terracotta-deep hover:underline">
+                <Link to={item.to} className="text-ivory/85 hover:text-white hover:underline">
                   {item.label}
                 </Link>
               </li>
@@ -26,11 +28,13 @@ export function Footer() {
         </nav>
       </Container>
 
-      <div className="border-t border-charcoal/10">
-        <Container className="py-6 text-xs leading-relaxed text-sage-deep">
-          AURA Studio est un projet de démonstration réalisé à des fins de portfolio. Les produits,
-          prix, avis et personnes présentés sont fictifs. Les recommandations de l'assistant sont
-          simulées et ne constituent pas un avis médical.
+      <div className="border-t border-ivory/15">
+        <Container className="flex flex-col gap-2 py-6 text-xs leading-relaxed text-ivory/75 md:flex-row md:justify-between">
+          <p className="font-semibold text-ivory">{DEMO_LABEL}</p>
+          <p className="max-w-2xl md:text-right">
+            Maison Aria est une marque fictive. Produits, prix, consultants et chiffres sont inventés.
+            Aucun paiement, aucun rendez-vous réel, aucune IA connectée. Photos d'illustration Unsplash.
+          </p>
         </Container>
       </div>
     </footer>
