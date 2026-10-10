@@ -1,7 +1,7 @@
 {
   "name": "maison-aria",
   "private": true,
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Maison Aria — projet personnel de démonstration : boutique fictive de mobilier et décoration, réservation de consultations et assistant ARIA Concierge simulé.",
   "type": "module",
   "engines": {

@@ -1,5 +1,7 @@
 # Maison Aria
 
+[![CI](https://github.com/sianahk22/maison-aria/actions/workflows/ci.yml/badge.svg)](https://github.com/sianahk22/maison-aria/actions/workflows/ci.yml)
+
 > ⚠️ **Projet personnel de démonstration — Maison Aria.**
 > Maison Aria est une **marque fictive**. Produits, prix, consultants, commandes, réservations et
 > statistiques sont inventés. Aucun produit n'est vendu, aucun paiement n'est effectué, aucun
@@ -88,6 +90,7 @@ npm run dev        # http://localhost:5173
 | `npm run preview` | Sert le build de production en local |
 | `npm run lint` | Vérification ESLint |
 | `npm test` | Tests unitaires : logique métier, garde-fou et serveur d'ARIA, catalogue, images |
+| (automatique) | GitHub Actions lance lint, tests et build à chaque push (`.github/workflows/ci.yml`) |
 | `npm run test:e2e` | Tests de bout en bout dans Firefox (parcours + audit 10 routes × 5 largeurs). Prérequis : Firefox installé et `npm run build` fait. Contre le site en ligne : `E2E_BASE_URL=https://… npm run test:e2e` |
 
 ## Architecture
