@@ -53,7 +53,8 @@ ARIA Concierge simulé, espace client et tableau de bord simulés.
 - Aucun secret dans le code ; variables d'environnement via `.env` (non versionné) + `.env.example`.
 - Images : uniquement via `data/images.js`, avec `alt` descriptif ; pas de personnes identifiables ni de marques.
 - Clé d'IA ou de paiement : jamais dans React ni dans une variable `VITE_…` ; uniquement côté serveur.
-- Déploiement : Vercel (`vercel.json` réécrit toutes les URL sauf `/api/` vers `index.html`).
+- Déploiement : Vercel, https://maison-aria.vercel.app (`vercel.json` réécrit toutes les URL sauf `/api/` vers `index.html`).
+  Code : https://github.com/sianahk22/maison-aria. `.vercel/` et `.env.local` (jeton Vercel) ne sont jamais commités.
 
 ## Pièges connus
 

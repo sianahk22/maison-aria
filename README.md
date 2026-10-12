@@ -15,7 +15,7 @@ réservations, assistant de recommandation ARIA Concierge, espace client et tabl
 
 ![Page d'accueil de Maison Aria](docs/cover.jpg)
 
-**Code source** : https://github.com/sianahk22/maison-aria · **Démo en ligne** : à venir (déploiement Vercel)
+**🔗 Démo en ligne : https://maison-aria.vercel.app** · Code source : https://github.com/sianahk22/maison-aria
 
 ## Sommaire
 
@@ -91,7 +91,7 @@ npm run dev        # http://localhost:5173
 | `npm run lint` | Vérification ESLint |
 | `npm test` | Tests unitaires : logique métier, garde-fou et serveur d'ARIA, catalogue, images |
 | (automatique) | GitHub Actions lance lint, tests et build à chaque push (`.github/workflows/ci.yml`) |
-| `npm run test:e2e` | Tests de bout en bout dans Firefox (parcours + audit 10 routes × 5 largeurs). Prérequis : Firefox installé et `npm run build` fait. Contre le site en ligne : `E2E_BASE_URL=https://… npm run test:e2e` |
+| `npm run test:e2e` | Tests de bout en bout dans Firefox (parcours + audit 10 routes × 5 largeurs). Prérequis : Firefox installé et `npm run build` fait. Contre le site en ligne : `E2E_BASE_URL=https://maison-aria.vercel.app npm run test:e2e` |
 
 ## Architecture
 
@@ -213,8 +213,8 @@ automatiquement.
 3. Réglages détectés automatiquement : *Framework* Vite, *Build* `npm run build`, *Output* `dist`.
 4. Aucune variable n'est obligatoire. Pour activer l'IA réelle d'ARIA : ajouter `ANTHROPIC_API_KEY`
    (et éventuellement `ARIA_AI_MODEL`), puis redéployer.
-5. Après le premier déploiement : remplacer `/og-cover.jpg` par l'URL absolue
-   (`https://…/og-cover.jpg`) dans `index.html` (balise `og:image`) pour les aperçus de partage.
+5. Si l'adresse publique change, mettre à jour `og:url` et `og:image` dans `index.html`
+   (aperçus de partage). Démo actuelle : https://maison-aria.vercel.app — redéployée à chaque push sur `main`.
 
 ## Limites actuelles
 

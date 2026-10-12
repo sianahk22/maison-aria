@@ -58,9 +58,15 @@ export async function launchBrowser() {
     logs,
     errors: () => logs.filter((line) => line.startsWith('error')),
     viewport: (width, height) => send('browsingContext.setViewport', { context, viewport: { width, height } }),
+    // Attend que la page soit réellement affichée (titre h1 présent), jusqu'à 10 s :
+    // en ligne, le réseau et le chargement à la demande prennent plus de temps qu'en local.
     async goto(path) {
       await send('browsingContext.navigate', { context, url: BASE + path, wait: 'complete' })
-      await sleep(700)
+      for (let i = 0; i < 40; i++) {
+        if (await page.eval(`return Boolean(document.querySelector('main h1'))`)) break
+        await sleep(250)
+      }
+      await sleep(500)
     },
     // Exécute du code dans la page ; la valeur renvoyée doit être sérialisable en JSON.
     async eval(code) {

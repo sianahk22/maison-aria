@@ -21,3 +21,6 @@ npm-debug.log*
 .idea/
 .DS_Store
 *.local
+
+# Vercel (configuration locale du projet et jeton d'accès, jamais publiés)
+.vercel

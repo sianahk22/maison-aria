@@ -1,4 +1,3 @@
-import { use } from 'react'
 import { useSearchParams } from 'react-router'
 import { PageHeader } from '../components/layout/PageHeader'
 import { Container } from '../components/ui/Container'
@@ -7,7 +6,7 @@ import { SmartImage } from '../components/ui/SmartImage'
 import { sceneImages } from '../data/images'
 import { ConciergeChat } from '../features/concierge/ConciergeChat'
 import { useProduct } from '../features/products/useProducts'
-import { getAriaMode } from '../services/conciergeService'
+import { useAriaMode } from '../features/concierge/useAriaMode'
 
 const HOW_IT_WORKS = [
   'ARIA analyse votre demande : type de meuble, style, ambiance, pièce, budget.',
@@ -19,7 +18,7 @@ export function ConciergePage() {
   const [searchParams] = useSearchParams()
   // ?product=<id> : question posée depuis une fiche produit.
   const contextProduct = useProduct(searchParams.get('product'))
-  const ariaMode = use(getAriaMode())
+  const ariaMode = useAriaMode()
 
   return (
     <>
@@ -39,6 +38,11 @@ export function ConciergePage() {
                 au modèle pour formuler une réponse ; n’y indiquez pas de données personnelles. Les
                 recommandations sont limitées au catalogue fictif et vérifiées par l’application. Ceci n’est
                 pas un conseil professionnel.
+              </span>
+            ) : ariaMode.mode === 'checking' ? (
+              <span>
+                <strong>ARIA Concierge.</strong> Vérification du mode de l’assistant… Les recommandations
+                sont toujours limitées au catalogue fictif. Ceci n’est pas un conseil professionnel.
               </span>
             ) : (
               <span>

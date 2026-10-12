@@ -1,11 +1,12 @@
-import { use, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ROUTES } from '../../app/routes'
 import { ButtonLink } from '../../components/ui/Button'
 import { Icon } from '../../components/ui/Icon'
 import { QUICK_SUGGESTIONS } from '../../lib/recommendationEngine'
-import { MAX_MESSAGE_LENGTH, getAriaMode } from '../../services/conciergeService'
+import { MAX_MESSAGE_LENGTH } from '../../services/conciergeService'
 import { useProducts } from '../products/useProducts'
 import { RecommendationCard } from './RecommendationCard'
+import { useAriaMode } from './useAriaMode'
 import { useConcierge } from './useConcierge'
 
 function AssistantAvatar() {
@@ -69,7 +70,7 @@ function Message({ message, productsById }) {
 
 export function ConciergeChat({ contextProduct }) {
   const products = useProducts()
-  const ariaMode = use(getAriaMode())
+  const ariaMode = useAriaMode()
   const productsById = new Map(products.map((product) => [product.id, product]))
   const { messages, thinking, send } = useConcierge({ contextProductId: contextProduct?.id })
   const [draft, setDraft] = useState(() =>

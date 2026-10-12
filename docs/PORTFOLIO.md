@@ -70,7 +70,7 @@ navigateur) · API Intl (fuseaux horaires) · localStorage
 ## Visuel et liens
 
 - Image de couverture : [`docs/cover.jpg`](cover.jpg) (1440 × 900) — version partage : `public/og-cover.jpg` (1200 × 630)
-- Démo en ligne : **à compléter après déploiement** (`https://…vercel.app`)
+- Démo en ligne : https://maison-aria.vercel.app
 - Code source : https://github.com/sianahk22/maison-aria
 
 ## Texte prêt à intégrer (section Projets)
@@ -85,4 +85,4 @@ navigateur) · API Intl (fuseaux horaires) · localStorage
 > tableau de bord. Conçu mobile d'abord, accessible et testé.
 >
 > **Stack :** React 19, Vite, React Router, Tailwind CSS, Vercel Functions, SDK Anthropic, node:test.
-> [Voir la démo](https://…) · [Voir le code](https://github.com/sianahk22/maison-aria)
+> [Voir la démo](https://maison-aria.vercel.app) · [Voir le code](https://github.com/sianahk22/maison-aria)

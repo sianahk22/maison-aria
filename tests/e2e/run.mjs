@@ -111,8 +111,9 @@ check('Concurrence → la deuxième vérification refuse', /vient d’être rés
 
 // ── ARIA Concierge ─────────────────────────────────────────────────────────
 await page.goto('/concierge')
+for (let i = 0; i < 40 && (await page.eval(`return document.querySelector('#chat-title + p')?.textContent`))?.startsWith('Vérification'); i++) await page.wait(250)
 const mode = await page.eval(`return document.querySelector('#chat-title + p')?.textContent`)
-check('Mode ARIA affiché', Boolean(mode), mode)
+check('Mode ARIA affiché (après vérification auprès du serveur)', Boolean(mode) && !mode.startsWith('Vérification'), mode)
 const suggestions = await page.eval(`return [...document.querySelectorAll('[aria-label="Suggestions de questions"] button')].map((b) => b.textContent)`)
 check('Questions rapides = exemples du cahier des charges', suggestions.includes('Quel objet convient à un intérieur minimaliste ?') && suggestions.includes('Je souhaite prendre rendez-vous.'))
 for (const question of suggestions) {
