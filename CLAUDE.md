@@ -55,6 +55,7 @@ ARIA Concierge simulé, espace client et tableau de bord simulés.
 - Clé d'IA ou de paiement : jamais dans React ni dans une variable `VITE_…` ; uniquement côté serveur.
 - Déploiement : Vercel, https://maison-aria.vercel.app (`vercel.json` réécrit toutes les URL sauf `/api/` vers `index.html`).
   Code : https://github.com/sianahk22/maison-aria. `.vercel/` et `.env.local` (jeton Vercel) ne sont jamais commités.
+  Vercel est relié au dépôt GitHub : chaque push sur `main` redéploie automatiquement le site (pas de `vercel deploy` manuel).
 
 ## Pièges connus
 
